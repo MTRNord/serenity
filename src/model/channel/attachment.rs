@@ -1,7 +1,7 @@
 #[cfg(feature = "model")]
 use hyper::Client as HyperClient;
 #[cfg(feature = "model")]
-use internal::prelude::*;
+use crate::internal::prelude::*;
 #[cfg(feature = "model")]
 use std::io::Read;
 

@@ -1,7 +1,7 @@
-use gateway::{InterMessage, ReconnectType, Shard, ShardAction};
-use internal::prelude::*;
-use internal::ws_impl::{ReceiverExt, SenderExt};
-use model::event::{Event, GatewayEvent};
+use crate::gateway::{InterMessage, ReconnectType, Shard, ShardAction};
+use crate::internal::prelude::*;
+use crate::internal::ws_impl::{ReceiverExt, SenderExt};
+use crate::model::event::{Event, GatewayEvent};
 use parking_lot::Mutex;
 use serde::Deserialize;
 use std::sync::{
@@ -25,7 +25,7 @@ use websocket::{
 };
 
 #[cfg(feature = "framework")]
-use framework::Framework;
+use crate::framework::Framework;
 #[cfg(feature = "voice")]
 use super::super::voice::ClientVoiceManager;
 
@@ -36,7 +36,7 @@ pub struct ShardRunner<H: EventHandler + Send + Sync + 'static> {
     data: Arc<Mutex<ShareMap>>,
     event_handler: Arc<H>,
     #[cfg(feature = "framework")]
-    framework: Arc<Mutex<Option<Box<Framework + Send>>>>,
+    framework: Arc<Mutex<Option<Box<dyn Framework + Send>>>>,
     manager_tx: Sender<ShardManagerMessage>,
     // channel to receive messages from the shard manager and dispatches
     runner_rx: Receiver<InterMessage>,
@@ -487,7 +487,7 @@ pub struct ShardRunnerOptions<H: EventHandler + Send + Sync + 'static> {
     pub data: Arc<Mutex<ShareMap>>,
     pub event_handler: Arc<H>,
     #[cfg(feature = "framework")]
-    pub framework: Arc<Mutex<Option<Box<Framework + Send>>>>,
+    pub framework: Arc<Mutex<Option<Box<dyn Framework + Send>>>>,
     pub manager_tx: Sender<ShardManagerMessage>,
     pub shard: Shard,
     pub threadpool: ThreadPool,

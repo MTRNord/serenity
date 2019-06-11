@@ -1,5 +1,5 @@
-use gateway::InterMessage;
-use internal::prelude::*;
+use crate::gateway::InterMessage;
+use crate::internal::prelude::*;
 use parking_lot::Mutex;
 use std::{
     collections::{HashMap, VecDeque},
@@ -23,7 +23,7 @@ use threadpool::ThreadPool;
 use typemap::ShareMap;
 
 #[cfg(feature = "framework")]
-use framework::Framework;
+use crate::framework::Framework;
 #[cfg(feature = "voice")]
 use client::bridge::voice::ClientVoiceManager;
 
@@ -354,7 +354,7 @@ pub struct ShardManagerOptions<'a, H: EventHandler + Send + Sync + 'static> {
     pub data: &'a Arc<Mutex<ShareMap>>,
     pub event_handler: &'a Arc<H>,
     #[cfg(feature = "framework")]
-    pub framework: &'a Arc<Mutex<Option<Box<Framework + Send>>>>,
+    pub framework: &'a Arc<Mutex<Option<Box<dyn Framework + Send>>>>,
     pub shard_index: u64,
     pub shard_init: u64,
     pub shard_total: u64,

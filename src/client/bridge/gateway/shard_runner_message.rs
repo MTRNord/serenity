@@ -1,4 +1,4 @@
-use model::{
+use crate::model::{
     gateway::Game,
     user::OnlineStatus,
     id::GuildId

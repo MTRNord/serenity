@@ -56,7 +56,7 @@ pub use self::{
     ws_client_ext::WebSocketGatewayClientExt
 };
 
-use model::{
+use crate::model::{
     gateway::Game,
     user::OnlineStatus
 };
@@ -68,7 +68,7 @@ use websocket::sync::{
 };
 
 #[cfg(feature = "client")]
-use client::bridge::gateway::ShardClientMessage;
+use crate::client::bridge::gateway::ShardClientMessage;
 
 pub type CurrentPresence = (Option<Game>, OnlineStatus);
 pub type WsClient = Client<TlsStream<TcpStream>>;

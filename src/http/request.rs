@@ -1,4 +1,4 @@
-use constants;
+use crate::constants;
 use hyper::{
     client::{Body, RequestBuilder as HyperRequestBuilder},
     header::{Authorization, ContentType, Headers, UserAgent},

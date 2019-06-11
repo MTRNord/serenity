@@ -29,7 +29,7 @@ impl<E: StdError> StdError for Error<E> {
         }
     }
 
-    fn cause(&self) -> Option<&StdError> {
+    fn cause(&self) -> Option<&dyn StdError> {
         use self::Error::*;
 
         match *self {

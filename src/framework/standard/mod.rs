@@ -31,9 +31,9 @@ pub use self::create_help_command::CreateHelpCommand;
 pub use self::create_command::{CreateCommand, FnOrCommand};
 pub use self::create_group::CreateGroup;
 
-use client::Context;
-use internal::RwLockExt;
-use model::{
+use crate::client::Context;
+use crate::internal::RwLockExt;
+use crate::model::{
     channel::Message,
     guild::{Guild, Member},
     id::{ChannelId, GuildId, UserId},
@@ -49,9 +49,9 @@ use super::Framework;
 use threadpool::ThreadPool;
 
 #[cfg(feature = "cache")]
-use client::CACHE;
+use crate::client::CACHE;
 #[cfg(feature = "cache")]
-use model::channel::Channel;
+use crate::model::channel::Channel;
 
 /// A convenience macro for generating a struct fulfilling the [`Command`][command trait] trait.
 ///
@@ -200,7 +200,7 @@ pub enum DispatchError {
     WebhookAuthor,
 }
 
-type DispatchErrorHook = Fn(Context, Message, DispatchError) + Send + Sync + 'static;
+type DispatchErrorHook = dyn Fn(Context, Message, DispatchError) + Send + Sync + 'static;
 
 /// A utility for easily managing dispatches to commands.
 ///
@@ -704,7 +704,7 @@ impl StandardFramework {
                 .or_insert_with(|| Arc::new(CommandGroup::default()));
 
             if let Some(ref mut group) = Arc::get_mut(ungrouped) {
-                let cmd: Arc<Command> = Arc::new(c);
+                let cmd: Arc<dyn Command> = Arc::new(c);
 
                 for alias in &cmd.options().aliases {
                      group.commands.insert(
@@ -1177,7 +1177,7 @@ impl Framework for StandardFramework {
 
                         if let Some(help) = help {
                             let groups = self.groups.clone();
-                            let mut args = command_and_help_args!(&message.content, position, command_length, &self.configuration.delimiters);
+                            let args = command_and_help_args!(&message.content, position, command_length, &self.configuration.delimiters);
 
                             threadpool.execute(move || {
 

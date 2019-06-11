@@ -40,7 +40,7 @@ use hyper::{
     net::HttpsConnector,
 };
 use hyper_native_tls::NativeTlsClient;
-use model::prelude::*;
+use crate::model::prelude::*;
 use parking_lot::Mutex;
 use self::{request::Request};
 use std::{

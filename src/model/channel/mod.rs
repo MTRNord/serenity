@@ -20,26 +20,26 @@ pub use self::private_channel::*;
 pub use self::reaction::*;
 pub use self::channel_category::*;
 
-use internal::RwLockExt;
-use model::prelude::*;
+use crate::internal::RwLockExt;
+use crate::model::prelude::*;
 use serde::de::Error as DeError;
 use serde::ser::{SerializeStruct, Serialize, Serializer};
 use serde_json;
 use super::utils::deserialize_u64;
 
 #[cfg(feature = "model")]
-use builder::{CreateMessage, EditMessage, GetMessages};
+use crate::builder::{CreateMessage, EditMessage, GetMessages};
 #[cfg(feature = "model")]
-use http::AttachmentType;
+use crate::http::AttachmentType;
 #[cfg(feature = "model")]
 use std::fmt::{Display, Formatter, Result as FmtResult};
 
 #[cfg(all(feature = "cache", feature = "model", feature = "utils"))]
 use std::str::FromStr;
 #[cfg(all(feature = "cache", feature = "model", feature = "utils"))]
-use model::misc::ChannelParseError;
+use crate::model::misc::ChannelParseError;
 #[cfg(all(feature = "cache", feature = "model", feature = "utils"))]
-use utils::parse_channel;
+use crate::utils::parse_channel;
 
 /// A container for any channel.
 #[derive(Clone, Debug)]
@@ -726,7 +726,7 @@ pub enum PermissionOverwriteType {
 mod test {
     #[cfg(all(feature = "model", feature = "utils"))]
     mod model_utils {
-        use model::prelude::*;
+        use crate::model::prelude::*;
         use parking_lot::RwLock;
         use std::collections::HashMap;
         use std::sync::Arc;

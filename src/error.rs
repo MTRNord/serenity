@@ -1,5 +1,5 @@
-use internal::prelude::*;
-use model::ModelError;
+use crate::internal::prelude::*;
+use crate::model::ModelError;
 use serde_json::Error as JsonError;
 use std::{
     error::Error as StdError,
@@ -21,11 +21,11 @@ use opus::Error as OpusError;
 #[cfg(feature = "websocket")]
 use websocket::result::WebSocketError;
 #[cfg(feature = "client")]
-use client::ClientError;
+use crate::client::ClientError;
 #[cfg(feature = "gateway")]
-use gateway::GatewayError;
+use crate::gateway::GatewayError;
 #[cfg(feature = "http")]
-use http::HttpError;
+use crate::http::HttpError;
 #[cfg(feature = "voice")]
 use voice::VoiceError;
 
@@ -194,7 +194,7 @@ impl StdError for Error {
         }
     }
 
-    fn cause(&self) -> Option<&StdError> {
+    fn cause(&self) -> Option<&dyn StdError> {
         match *self {
             #[cfg(feature = "http")]
             Error::Hyper(ref inner) => Some(inner),

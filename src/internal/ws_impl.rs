@@ -1,6 +1,6 @@
 use flate2::read::ZlibDecoder;
-use gateway::GatewayError;
-use internal::prelude::*;
+use crate::gateway::GatewayError;
+use crate::internal::prelude::*;
 use serde_json;
 use websocket::{
     message::OwnedMessage,

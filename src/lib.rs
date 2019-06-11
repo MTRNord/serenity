@@ -149,8 +149,8 @@ extern crate sodiumoxide;
 extern crate threadpool;
 #[cfg(feature = "typemap")]
 extern crate typemap;
-#[cfg(feature = "evzht9h3nznqzwl")]
-extern crate evzht9h3nznqzwl as websocket;
+#[cfg(feature = "websockets")]
+extern crate websocket;
 
 #[allow(unused_imports)]
 #[cfg(test)]
@@ -183,13 +183,13 @@ pub mod voice;
 
 mod error;
 
-pub use error::{Error, Result};
+pub use crate::error::{Error, Result};
 
 #[cfg(feature = "client")]
-pub use client::Client;
+pub use crate::client::Client;
 
 #[cfg(feature = "cache")]
-use cache::Cache;
+use crate::cache::Cache;
 #[cfg(feature = "cache")]
 use parking_lot::RwLock;
 

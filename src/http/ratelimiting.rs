@@ -46,7 +46,7 @@ use chrono::{DateTime, Utc};
 use hyper::client::Response;
 use hyper::header::Headers;
 use hyper::status::StatusCode;
-use internal::prelude::*;
+use crate::internal::prelude::*;
 use parking_lot::Mutex;
 use std::{
     collections::HashMap,

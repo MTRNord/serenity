@@ -1,13 +1,13 @@
 use chrono::Utc;
-use client::Context;
-use model::id::{ChannelId, GuildId, UserId};
+use crate::client::Context;
+use crate::model::id::{ChannelId, GuildId, UserId};
 use std::{
     collections::HashMap,
     default::Default
 };
 
 #[cfg(feature = "cache")]
-type Check = Fn(&mut Context, Option<GuildId>, ChannelId, UserId) -> bool + Send + Sync + 'static;
+type Check = dyn Fn(&mut Context, Option<GuildId>, ChannelId, UserId) -> bool + Send + Sync + 'static;
 
 #[cfg(not(feature = "cache"))]
 type Check = Fn(&mut Context, ChannelId, UserId) -> bool + Send + Sync + 'static;

@@ -1,6 +1,6 @@
-use client::bridge::gateway::ShardMessenger;
-use gateway::InterMessage;
-use model::prelude::*;
+use crate::client::bridge::gateway::ShardMessenger;
+use crate::gateway::InterMessage;
+use crate::model::prelude::*;
 use parking_lot::Mutex;
 use std::sync::{
     mpsc::Sender,
@@ -9,15 +9,15 @@ use std::sync::{
 use typemap::ShareMap;
 
 #[cfg(feature = "builder")]
-use builder::EditProfile;
+use crate::builder::EditProfile;
 #[cfg(feature = "builder")]
-use internal::prelude::*;
+use crate::internal::prelude::*;
 #[cfg(all(feature = "builder", feature = "cache"))]
 use super::CACHE;
 #[cfg(feature = "builder")]
-use {Result, http};
+use crate::{Result, http};
 #[cfg(feature = "builder")]
-use utils::{self, VecMap};
+use crate::utils::{self, VecMap};
 
 /// The context is a general utility struct provided on event dispatches, which
 /// helps with dealing with the current "context" of the event dispatch.

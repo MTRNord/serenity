@@ -1,4 +1,4 @@
-use internal::prelude::*;
+use crate::internal::prelude::*;
 use serde::de::{
     self,
     Deserialize,
@@ -348,13 +348,13 @@ mod action_handler {
 
                 Ok(match value {
                     1 => Action::GuildUpdate,
-                    10...12 => Action::Channel(unsafe { transmute(value) }),
-                    13...15 => Action::ChannelOverwrite(unsafe { transmute(value) }),
-                    20...25 => Action::Member(unsafe { transmute(value) }),
-                    30...32 => Action::Role(unsafe { transmute(value) }),
-                    40...42 => Action::Invite(unsafe { transmute(value) }),
-                    50...52 => Action::Webhook(unsafe { transmute(value) }),
-                    60...62 => Action::Emoji(unsafe { transmute(value) }),
+                    10..=12 => Action::Channel(unsafe { transmute(value) }),
+                    13..=15 => Action::ChannelOverwrite(unsafe { transmute(value) }),
+                    20..=25 => Action::Member(unsafe { transmute(value) }),
+                    30..=32 => Action::Role(unsafe { transmute(value) }),
+                    40..=42 => Action::Invite(unsafe { transmute(value) }),
+                    50..=52 => Action::Webhook(unsafe { transmute(value) }),
+                    60..=62 => Action::Emoji(unsafe { transmute(value) }),
                     72 => Action::MessageDelete,
                     _ => return Err(E::custom(format!("Unexpected action number: {}", value))),
                 })

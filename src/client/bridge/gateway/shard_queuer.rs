@@ -1,5 +1,5 @@
-use gateway::Shard;
-use internal::prelude::*;
+use crate::gateway::Shard;
+use crate::internal::prelude::*;
 use parking_lot::Mutex;
 use std::{
     collections::{HashMap, VecDeque},
@@ -24,12 +24,12 @@ use super::{
 };
 use threadpool::ThreadPool;
 use typemap::ShareMap;
-use ::gateway::ConnectionStage;
+use crate::gateway::ConnectionStage;
 
 #[cfg(feature = "voice")]
 use client::bridge::voice::ClientVoiceManager;
 #[cfg(feature = "framework")]
-use framework::Framework;
+use crate::framework::Framework;
 
 const WAIT_BETWEEN_BOOTS_IN_SECONDS: u64 = 5;
 
@@ -52,7 +52,7 @@ pub struct ShardQueuer<H: EventHandler + Send + Sync + 'static> {
     pub event_handler: Arc<H>,
     /// A copy of the framework
     #[cfg(feature = "framework")]
-    pub framework: Arc<Mutex<Option<Box<Framework + Send>>>>,
+    pub framework: Arc<Mutex<Option<Box<dyn Framework + Send>>>>,
     /// The instant that a shard was last started.
     ///
     /// This is used to determine how long to wait between shard IDENTIFYs.

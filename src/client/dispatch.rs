@@ -1,5 +1,5 @@
-use gateway::InterMessage;
-use model::{
+use crate::gateway::InterMessage;
+use crate::model::{
     channel::{Channel, Message},
     event::Event,
     guild::Member,
@@ -16,9 +16,9 @@ use threadpool::ThreadPool;
 use typemap::ShareMap;
 
 #[cfg(feature = "framework")]
-use framework::Framework;
+use crate::framework::Framework;
 #[cfg(feature = "cache")]
-use model::id::GuildId;
+use crate::model::id::GuildId;
 #[cfg(feature = "cache")]
 use std::time::Duration;
 
@@ -73,7 +73,7 @@ pub(crate) enum DispatchEvent {
 #[cfg_attr(feature = "cargo-clippy", allow(too_many_arguments))]
 pub(crate) fn dispatch<H: EventHandler + Send + Sync + 'static>(
     event: DispatchEvent,
-    framework: &Arc<Mutex<Option<Box<Framework + Send>>>>,
+    framework: &Arc<Mutex<Option<Box<dyn Framework + Send>>>>,
     data: &Arc<Mutex<ShareMap>>,
     event_handler: &Arc<H>,
     runner_tx: &Sender<InterMessage>,

@@ -23,14 +23,14 @@
 //! [`plain`]: fn.plain.html
 //! [`with_embeds`]: fn.with_embeds.html
 
-use client::Context;
+use crate::client::Context;
 #[cfg(feature = "cache")]
-use framework::standard::{has_correct_roles, has_correct_permissions};
-use model::{
+use crate::framework::standard::{has_correct_roles, has_correct_permissions};
+use crate::model::{
     channel::Message,
     id::ChannelId,
 };
-use Error;
+use crate::Error;
 use std::{
     borrow::Borrow,
     collections::HashMap,
@@ -49,7 +49,7 @@ use super::{
     CommandError,
     HelpBehaviour,
 };
-use utils::Colour;
+use crate::utils::Colour;
 
 /// Macro to format a command according to a `HelpBehaviour` or
 /// continue to the next command-name upon hiding.
@@ -557,7 +557,7 @@ pub fn create_customised_help_data<'a, H: BuildHasher>(
                             .map_or(false, |v| v.iter().any(|prefix|
                             *prefix == searched_named_lowercase)) {
 
-                        let mut single_group = create_single_group(
+                        let single_group = create_single_group(
                             &group,
                             &key,
                             &msg,
